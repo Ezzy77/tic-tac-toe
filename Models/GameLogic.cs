@@ -4,36 +4,97 @@ namespace tic_tac_toe.Models
 	public class GameLogic
 	{
         // Reference to the game board
-        private GameBoard _board;
-
-		public GameLogic(GameBoard board)
-		{
-			_board = board;
-		}
-
-
-        public bool MakeMove(int row, int col, char player)
+        private Player[] players;
+        private Player currentPlayer;
+        private GameBoard gameBoard;
+		public GameLogic(Player player1, Player player2)
         {
-            if (_board.Board[row, col] == ' ' && !_board.IsGameOver)
+            gameBoard = new GameBoard();
+            players = new Player[] { player1, player2 };
+            currentPlayer = player1;
+        }
+
+        private bool IsValidMove(int row, int col)
+        {
+            if (row < 0 || row >= 3)
+                return false;
+            if (col < 0 || col >= 3)
+                return false;
+            return gameBoard.IsCellEmpty(row, col);
+        }
+
+        public bool MakeMove(int row, int col)
+        {
+            if (!IsValidMove(row, col)) return false;
+            gameBoard.UpdateCell(row, col, currentPlayer.Symbol);
+
+            if (CheckForWin(currentPlayer.Symbol))
             {
-                _board.Board[row, col] = player; // Set player's move on the board
-                CheckForWin(player); // Check if the move resulted in a win
-                CheckForDraw(); // Check if the game ended in a draw
-                return true; // Move successful
+                // Current player won the game
+                currentPlayer.HasWon = true;
+                currentPlayer.Score++;
+                // Update the game's state and possibly announce the winner.
+                return true;
             }
-            return false; // Move unsuccessful
+            else if (CheckForDraw())
+            {
+                // The game is a draw.
+                // Update the game's state accordingly.
+            }
+            else
+            {
+                // Switch to the other player.
+                currentPlayer = (currentPlayer == players[0]) ? players[1] : players[0];
+            }
+
+            return true;
         }
 
-        private void CheckForWin(char player)
+        private bool CheckForWin(PlayerSymbol playerSymbol)
         {
-            // Check rows, columns, and diagonals for a win
-            // Update _board.IsGameOver and _board.Winner accordingly
+            // Check rows
+            for (int i = 0; i < 3; i++)
+            {
+                if(gameBoard.board[i, 0] == (int)playerSymbol &&
+                   gameBoard.board[i, 1] == (int)playerSymbol &&
+                   gameBoard.board[i, 2] ==(int) playerSymbol)
+                    return true;
+            }
+            
+            // Check columns
+            for (int i = 0; i < 3; i++)
+            {
+                if(gameBoard.board[0, i] == (int)playerSymbol &&
+                   gameBoard.board[1, i] == (int)playerSymbol &&
+                   gameBoard.board[2, i] == (int)playerSymbol)
+                    return true;
+            }
+            
+            // Check diagonals
+            if(gameBoard.board[0, 0] ==(int) playerSymbol &&
+               gameBoard.board[1, 1] ==(int) playerSymbol &&
+               gameBoard.board[2, 2] == (int)playerSymbol)
+                return true;
+            
+            if(gameBoard.board[0, 2] ==(int) playerSymbol &&
+               gameBoard.board[1, 1] == (int)playerSymbol &&
+               gameBoard.board[2, 0] ==(int) playerSymbol)
+                return true;
+            
+            return false;
         }
 
-        private void CheckForDraw()
+        private bool CheckForDraw()
         {
-            // Check if the game ended in a draw
-            // Update _board.IsGameOver accordingly
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (gameBoard.IsCellEmpty(i, j)) // a cell is still free, so no draw
+                        return false;
+                }
+            }
+            return true; // No cell is free, it's a draw
         }
 
     }

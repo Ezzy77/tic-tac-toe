@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="tic_tac_toe.Views.GameModePage"
-             Title="GameModePage">
+             Title="Game Mode"
+             >
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
         <Button Text="Play against Computer" Clicked="PlayAgainstComputerButton_Clicked" Margin="10" />
         <Button Text="Play against Friend Online" Clicked="PlayOnlineButton_Clicked" Margin="10" />

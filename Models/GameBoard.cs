@@ -3,19 +3,37 @@ namespace tic_tac_toe.Models
 {
 	public class GameBoard
 	{
-		// represents the game board
-		public char[,] Board { get; private set; }
-		// indicates if the game is over
+		public int[,] board { get; private set; }
 		public bool IsGameOver { get; private set; }
-		// stores the winner
-		public char Winner { get; private set; }
+		public int Winner { get; private set; }
 
 		public GameBoard()
 		{
-			// init the game board
-			Board = new char[3, 3];
-			// reset the board
-			ResetBoard();
+			board = new int[3, 3];
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					// 0 represents empty cells
+					board[i, j] = 0;
+				}
+			}
+		}
+
+		public void UpdateCell(int row, int col, PlayerSymbol symbol)
+		{
+			if (IsCellEmpty(row, col))
+			{
+				if (symbol == PlayerSymbol.X)
+				{
+					board[row, col] = 1;
+				}
+				else
+				{
+					board[row, col] = 2;
+				}
+
+			}
 		}
 
 		public void ResetBoard()
@@ -25,16 +43,24 @@ namespace tic_tac_toe.Models
 			{
 				for (int j = 0; j < 3; j++)
 				{
-					Board[i, j] = ' '; // Empty cell
+					board[i, j] = 0; // Empty cell
 				}
 			}
 			// reset game over status
 			IsGameOver = false;
 
-			Winner = ' ';
+			Winner = 0;
 		}
 
+		public void ExitGame()
+		{
+			ResetBoard();
+		}
 
-		// more games methods 
+		public bool IsCellEmpty(int row, int col)
+		{
+			return board[row, col] == 0;
+		}
+
 	}
 }

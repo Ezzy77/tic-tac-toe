@@ -62,10 +62,6 @@
 	  <None Remove="Resources\Images\tictactoe_X.jpeg" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Views\" />
-	  <Folder Include="Models\" />
-	</ItemGroup>
-	<ItemGroup>
 	  <BundleResource Include="Resources\Images\tictactoe_o.png" />
 	  <BundleResource Include="Resources\Images\tictactoe_X.jpeg" />
 	</ItemGroup>
