@@ -5,13 +5,13 @@ namespace tic_tac_toe.Models
 	{
         // Reference to the game board
         private Player[] players;
-        private Player currentPlayer;
+        public Player CurrentPlayer;
         private GameBoard gameBoard;
 		public GameLogic(Player player1, Player player2)
         {
             gameBoard = new GameBoard();
             players = new Player[] { player1, player2 };
-            currentPlayer = player1;
+            CurrentPlayer = player1;
         }
 
         private bool IsValidMove(int row, int col)
@@ -26,13 +26,13 @@ namespace tic_tac_toe.Models
         public bool MakeMove(int row, int col)
         {
             if (!IsValidMove(row, col)) return false;
-            gameBoard.UpdateCell(row, col, currentPlayer.Symbol);
+            gameBoard.UpdateCell(row, col, CurrentPlayer.Symbol);
 
-            if (CheckForWin(currentPlayer.Symbol))
+            if (CheckForWin(CurrentPlayer.Symbol))
             {
                 // Current player won the game
-                currentPlayer.HasWon = true;
-                currentPlayer.Score++;
+                CurrentPlayer.HasWon = true;
+                CurrentPlayer.Score++;
                 // Update the game's state and possibly announce the winner.
                 return true;
             }
@@ -44,7 +44,7 @@ namespace tic_tac_toe.Models
             else
             {
                 // Switch to the other player.
-                currentPlayer = (currentPlayer == players[0]) ? players[1] : players[0];
+                CurrentPlayer = (CurrentPlayer == players[0]) ? players[1] : players[0];
             }
 
             return true;
@@ -84,7 +84,7 @@ namespace tic_tac_toe.Models
             return false;
         }
 
-        private bool CheckForDraw()
+        public bool CheckForDraw()
         {
             for (int i = 0; i < 3; i++)
             {

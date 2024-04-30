@@ -51,94 +51,132 @@
             <Button 
                 Grid.Row="0" 
                 Grid.Column="0" 
+                FontSize="40" 
                 Text="" 
                 x:Name="Cell00" 
                 Margin="2" 
                 WidthRequest="80" 
                 HeightRequest="80" 
+                Clicked="OnButtonClicked"
                 />
             <Button 
                 Grid.Row="0" 
                 Grid.Column="1" 
+                FontSize="40" 
                 Text="" 
                 x:Name="Cell01" 
                 Margin="2" 
                 WidthRequest="80" 
                 HeightRequest="80"
+                Clicked="OnButtonClicked"
+
                 />
             <Button 
                 Grid.Row="0" 
                 Grid.Column="2" 
                 FontSize="40" 
-                Text="X" 
+                Text="" 
                 x:Name="Cell02" 
                 Margin="2" 
                 WidthRequest="80" 
                 HeightRequest="80"
+                Clicked="OnButtonClicked"
+
                 />
 
             
             <Button 
                 Grid.Row="1" 
                 Grid.Column="0" 
-                FontSize="Header" 
+                FontSize="40"  
                 Text="" x:Name="Cell10" 
                 Margin="2" 
                 WidthRequest="80" 
                 HeightRequest="80"
+                Clicked="OnButtonClicked"
+
                 />
             <Button 
                 Grid.Row="1" 
                 Grid.Column="1" 
-                FontSize="50"  
-                Text="O" 
+                FontSize="40"   
+                Text="" 
                 x:Name="Cell11" 
                 Margin="2" 
                 WidthRequest="80" 
                 HeightRequest="80"
+                Clicked="OnButtonClicked"
+
                 />
             <Button 
                 Grid.Row="1" 
                 Grid.Column="2" 
+                FontSize="40" 
                 Text="" 
                 x:Name="Cell12" 
                 Margin="2" 
                 WidthRequest="80" 
                 HeightRequest="80"
+                Clicked="OnButtonClicked"
+
                 />
 
             <Button 
                 Grid.Row="2" 
                 Grid.Column="0" 
+                FontSize="40" 
                 Text="" 
                 x:Name="Cell20" 
                 Margin="2" 
                 WidthRequest="80" 
                 HeightRequest="80"
+                Clicked="OnButtonClicked"
+
                 />
             <Button 
                 Grid.Row="2" 
                 Grid.Column="1" 
+                FontSize="40" 
                 Text="" 
                 x:Name="Cell21" 
                 Margin="2" 
                 WidthRequest="80" 
-                HeightRequest="80"/>
+                HeightRequest="80"
+                Clicked="OnButtonClicked"
+
+                />
+            
             <Button 
                 Grid.Row="2" 
                 Grid.Column="2" 
+                FontSize="40" 
                 Text="" 
                 x:Name="Cell22"  
                 Margin="2" 
                 WidthRequest="80" 
-                HeightRequest="80"/>
+                HeightRequest="80"
+                Clicked="OnButtonClicked"
+
+                />
         </Grid>
-        <Button 
-            Text="End the Game" 
-            Clicked="EndGameButton_Clicked" 
-            HorizontalOptions="Center" 
-            Margin="20" 
-            />
+         <StackLayout Orientation="Horizontal"
+                      HorizontalOptions="CenterAndExpand"
+                      Margin="20,0"
+                      >
+             <Button
+                 Text="Reset The Game"
+                 Clicked="OnGameReset_Clicked"
+                 HorizontalOptions="Center"
+                 Margin="20"
+             />
+             <Button 
+                 Text="Exit The Game" 
+                 Clicked="EndGameButton_Clicked" 
+                 HorizontalOptions="Center" 
+                 Margin="20" 
+             />
+             
+         </StackLayout>
 
     </StackLayout>
 </ContentPage>
