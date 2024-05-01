@@ -7,7 +7,6 @@ public class Player
     public PlayerSymbol Symbol { get; private set; }
     public PlayerType Type { get; private set; }
     public int Score { get; set; }
-    public bool HasWon { get; set; }
 
     public Player(string name, PlayerSymbol symbol, PlayerType type)
     {
@@ -15,7 +14,6 @@ public class Player
         Symbol = symbol;
         Type = type;
         Score = 0;
-        HasWon = false;
     }
     
     

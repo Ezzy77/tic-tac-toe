@@ -34,6 +34,13 @@
                 </Frame>
         </StackLayout>
 
+         <Label 
+             BackgroundColor="Lime"
+             x:Name="WinnerLabel" 
+             HorizontalOptions="Center" 
+             VerticalOptions="CenterAndExpand" 
+             Text="Hi there"
+             />
         <!-- Game Board -->
         <Grid Margin="72" VerticalOptions="Center" >
             <Grid.RowDefinitions>
