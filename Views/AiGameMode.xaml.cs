@@ -27,22 +27,18 @@ public partial class AiGameMode : ContentPage , INotifyPropertyChanged
         var row = Grid.GetRow(button);
         var col = Grid.GetColumn(button);
 
+        var symbol = _gameLogic.CurrentPlayer.Symbol;
 
         if (!_gameLogic.MakeMove(row, col))
         {
             WinnerLabel.Text = "Invalid Move";
             return;
         }
-        button.Text = _gameLogic.CurrentPlayer.Symbol == PlayerSymbol.X ? "O" : "X";
-
-        WinnerLabel.Text = "Valid Move";
+        button.Text = _gameLogic.CurrentPlayer.Symbol == PlayerSymbol.X ? "X" : "O";
         
-
-        var win = _gameLogic.CheckForWin(_gameLogic.CurrentPlayer.Symbol);
-        Console.WriteLine(win);
-        if (win)
+        if (_gameLogic.CheckForWin(_gameLogic.CurrentPlayer.Symbol))
         {
-            WinnerLabel.Text = $"Player {_gameLogic.CurrentPlayer.Symbol} has Won!!!";
+            WinnerLabel.Text = $"Player {symbol} has Won!!!";
             DisableGameButtons();
             return;
         }
@@ -50,6 +46,7 @@ public partial class AiGameMode : ContentPage , INotifyPropertyChanged
         if (_gameLogic.CheckForDraw())
         {
             WinnerLabel.Text = "Its a draw";
+            DisableGameButtons();
         }
         _gameLogic.SwitchPlayer();
         
