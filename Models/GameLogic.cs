@@ -93,50 +93,7 @@
             return hasWonInLeftRightDiagonal || hasWonInRightLeftDiagonal;
         }
 
-        // private bool HasPlayerWonInRows(PlayerSymbol playerSymbol)
-        // {
-        //     char symbol = (char)playerSymbol;
-        //     for (int row = 0; row < 3; row++)
-        //     {
-        //         if (_gameBoard.Board[row, 0] == symbol &&
-        //             _gameBoard.Board[row, 1] == symbol &&
-        //             _gameBoard.Board[row, 2] == symbol)
-        //         {
-        //             return true;
-        //         }
-        //     }
-        //     return false;
-        // }
-        //
-        // private bool HasPlayerWonInColumns(PlayerSymbol playerSymbol)
-        // {
-        //     char symbol = (char)playerSymbol;
-        //     for (int col = 0; col < 3; col++)
-        //     {
-        //         if (_gameBoard.Board[0, col] == symbol &&
-        //             _gameBoard.Board[1, col] == symbol &&
-        //             _gameBoard.Board[2, col] == symbol)
-        //         {
-        //             return true;
-        //         }
-        //     }
-        //     return false;
-        // }
-        //
-        // private bool HasPlayerWonInDiagonal(PlayerSymbol playerSymbol)
-        // {
-        //     char symbol = (char)playerSymbol;
-        //     bool hasWonInLeftRightDiagonal = _gameBoard.Board[0, 0] == symbol &&
-        //                                      _gameBoard.Board[1, 1] == symbol &&
-        //                                      _gameBoard.Board[2, 2] == symbol;
-        //
-        //     bool hasWonInRightLeftDiagonal = _gameBoard.Board[0, 2] == symbol &&
-        //                                      _gameBoard.Board[1, 1] == symbol &&
-        //                                      _gameBoard.Board[2, 0] == symbol;
-        //
-        //     return hasWonInLeftRightDiagonal || hasWonInRightLeftDiagonal;
-        // }
-        //
+        
         public bool CheckForDraw()
         {
             for (var i = 0; i < 3; i++)
@@ -150,12 +107,4 @@
         }
     }
 }
-//         
-//         public void ResetGame()
-//         {
-//             gameBoard.ResetBoard();
-//         }
-//
-//     }
-// }
-//
+

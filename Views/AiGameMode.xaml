@@ -172,6 +172,7 @@
                       >
              <Button
                  Text="Reset The Game"
+                 Clicked="OnGameReset_Clicked"
                  HorizontalOptions="Center"
                  Margin="20"
              />

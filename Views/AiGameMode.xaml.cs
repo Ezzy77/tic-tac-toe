@@ -42,7 +42,8 @@ public partial class AiGameMode : ContentPage , INotifyPropertyChanged
         Console.WriteLine(win);
         if (win)
         {
-            WinnerLabel.Text = "Its a Win";
+            WinnerLabel.Text = $"Player {_gameLogic.CurrentPlayer.Symbol} has Won!!!";
+            DisableGameButtons();
             return;
         }
         
@@ -53,6 +54,20 @@ public partial class AiGameMode : ContentPage , INotifyPropertyChanged
         _gameLogic.SwitchPlayer();
         
     }
+
+    private void DisableGameButtons()
+    {
+        // Disable all game buttons/cells after win detected
+        Cell00.IsEnabled = false;
+        Cell01.IsEnabled = false;
+        Cell02.IsEnabled = false;
+        Cell10.IsEnabled = false;
+        Cell11.IsEnabled = false;
+        Cell12.IsEnabled = false;
+        Cell20.IsEnabled = false;
+        Cell21.IsEnabled = false;
+        Cell22.IsEnabled = false;
+    }
     
     private async void EndGameButton_Clicked(object sender, EventArgs e)
     {
@@ -61,8 +76,33 @@ public partial class AiGameMode : ContentPage , INotifyPropertyChanged
         await Navigation.PopAsync(); // Navigate back to the previous page
     }
 
-    // public void OnGameReset_Clicked(object sender, EventArgs e)
-    // {
-    //     _gameLogic.ResetGame();
-    // }
+    private void OnGameReset_Clicked(object sender, EventArgs e)
+    {
+        _gameLogic.ResetGame();
+        Cell00.IsEnabled = true;
+        Cell01.IsEnabled = true;
+        Cell02.IsEnabled = true;
+        Cell10.IsEnabled = true;
+        Cell11.IsEnabled = true;
+        Cell12.IsEnabled = true;
+        Cell20.IsEnabled = true;
+        Cell21.IsEnabled = true;
+        Cell22.IsEnabled = true;
+        
+        List<Button> gameButtons = new List<Button> 
+        { 
+            Cell00, Cell01, Cell02, 
+            Cell10, Cell11, Cell12, 
+            Cell20, Cell21, Cell22 
+        };
+
+        foreach(Button button in gameButtons)
+        {
+            button.IsEnabled = true;
+            button.Text = string.Empty;
+        }
+        
+        WinnerLabel.Text = "Game Reset";
+
+    }
 }
