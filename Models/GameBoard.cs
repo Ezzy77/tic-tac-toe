@@ -1,20 +1,19 @@
-﻿using System;
-namespace tic_tac_toe.Models
+﻿namespace tic_tac_toe.Models
 {
 	public class GameBoard
 	{
-		public char[,] board { get; private set; }
+		public char[,] Board { get; private set; }
 		public bool IsGameOver { get; private set; }
 		public int Winner { get; private set; }
 
 		public GameBoard()
 		{
-			board = new Char[3, 3];
-			for (int i = 0; i < 3; i++)
+			Board = new Char[3, 3];
+			for (var i = 0; i < 3; i++)
 			{
-				for (int j = 0; j < 3; j++)
+				for (var j = 0; j < 3; j++)
 				{
-					board[i, j] = '*';
+					Board[i, j] = '*';
 				}
 			}
 		}
@@ -25,14 +24,28 @@ namespace tic_tac_toe.Models
 			{
 				if (symbol == PlayerSymbol.X)
 				{
-					board[row, col] = 'X';
+					Board[row, col] = 'X';
 				}
 				else
 				{
-					board[row, col] = 'O';
+					Board[row, col] = 'O';
 				}
+				PrintBoard();
 
 			}
+		}
+
+		private void PrintBoard()
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					Console.Write(Board[i, j] + " ");
+				}
+				Console.WriteLine();
+			}
+			Console.WriteLine();
 		}
 
 		public void ResetBoard()
@@ -41,7 +54,7 @@ namespace tic_tac_toe.Models
 			{
 				for (int j = 0; j < 3; j++)
 				{
-					board[i, j] = '*'; // Empty cell
+					Board[i, j] = '*'; // Empty cell
 				}
 			}
 			IsGameOver = false;
@@ -51,7 +64,7 @@ namespace tic_tac_toe.Models
 
 		public bool IsCellEmpty(int row, int col)
 		{
-			return board[row, col] == '*';
+			return Board[row, col] == '*';
 		}
 
 	}
