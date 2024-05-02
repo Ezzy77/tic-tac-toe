@@ -1,22 +1,20 @@
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using tic_tac_toe.Models;
+using tic_tac_toe.ViewModel;
+
 namespace tic_tac_toe.Views;
 
-public partial class AiGameMode : ContentPage , INotifyPropertyChanged
+public partial class AiGameMode
 {
    
-    private readonly GameLogic _gameLogic;
+    private AiGameModeViewModel _viewModel;
+
     public AiGameMode()
     {
         InitializeComponent();
+        _viewModel = new AiGameModeViewModel();
+        BindingContext = _viewModel;
 
-        var player1 = new Player("Player 1", PlayerSymbol.X, PlayerType.Human);
-        var player2 = new Player("AI", PlayerSymbol.O, PlayerType.Computer);
-
-        _gameLogic = new GameLogic(player1, player2);
-        BindingContext = _gameLogic;
     }
     
     void OnButtonClicked(object sender, EventArgs e)
@@ -27,30 +25,54 @@ public partial class AiGameMode : ContentPage , INotifyPropertyChanged
         var row = Grid.GetRow(button);
         var col = Grid.GetColumn(button);
 
-        var symbol = _gameLogic.CurrentPlayer.Symbol;
+        var symbol = _viewModel._gameLogic.CurrentPlayer.Symbol;
 
-        if (!_gameLogic.MakeMove(row, col))
+        if (!_viewModel._gameLogic.MakeMove(row, col))
         {
-            WinnerLabel.Text = "Invalid Move";
+            WinnerLabel.IsEnabled = true;
+             WinnerLabel.Text = "Invalid Move";
             return;
         }
-        button.Text = _gameLogic.CurrentPlayer.Symbol == PlayerSymbol.X ? "X" : "O";
+        button.Text = _viewModel._gameLogic.CurrentPlayer.Symbol == PlayerSymbol.X ? "X" : "O";
         
-        if (_gameLogic.CheckForWin(_gameLogic.CurrentPlayer.Symbol))
+        if (_viewModel._gameLogic.CheckForWin(_viewModel._gameLogic.CurrentPlayer.Symbol))
         {
+            WinnerLabel.IsEnabled = true;
+
             WinnerLabel.Text = $"Player {symbol} has Won!!!";
             DisableGameButtons();
+            _viewModel._gameLogic.CurrentPlayer.Score+= 1;
+            
+            // to update UI 
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                _viewModel.UpdatePlayerScores();
+            });
+
+            Console.WriteLine("player 1 score is : " + _viewModel.Player1Score);
+            Console.WriteLine("player 2 score is : " + _viewModel.Player2Score);
+
             return;
         }
         
-        if (_gameLogic.CheckForDraw())
+        if (_viewModel._gameLogic.CheckForDraw())
         {
-            WinnerLabel.Text = "Its a draw";
+            WinnerLabel.IsEnabled = true;
+
+             WinnerLabel.Text = "Its a draw";
+            ShowWinnerAlert(_viewModel._gameLogic.CurrentPlayer.Name);
+
             DisableGameButtons();
         }
-        _gameLogic.SwitchPlayer();
+        _viewModel._gameLogic.SwitchPlayer();
         
     }
+    
+    private async void ShowWinnerAlert(string winnerName)
+    {
+        await DisplayAlert("Winner!", $"{winnerName} has won the game!", "OK");
+    }
+
 
     private void DisableGameButtons()
     {
@@ -75,7 +97,7 @@ public partial class AiGameMode : ContentPage , INotifyPropertyChanged
 
     private void OnGameReset_Clicked(object sender, EventArgs e)
     {
-        _gameLogic.ResetGame();
+        _viewModel._gameLogic.ResetGame();
         Cell00.IsEnabled = true;
         Cell01.IsEnabled = true;
         Cell02.IsEnabled = true;

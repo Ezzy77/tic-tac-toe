@@ -2,47 +2,46 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="tic_tac_toe.Views.AiGameMode"
-             xmlns:models="clr-namespace:tic_tac_toe.Models"
+             xmlns:vm="clr-namespace:tic_tac_toe.ViewModel"
              Title="Gaming Playground"
              BackgroundColor="#192841">
-    <ContentPage.BindingContext >
-        <models:GameBoard/>
-
+    <ContentPage.BindingContext>
+        <vm:AiGameModeViewModel />
     </ContentPage.BindingContext>
-
- <StackLayout VerticalOptions="Center">
+    <StackLayout VerticalOptions="Center">
          <!-- Player Profiles -->
-        <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10">
-            <Frame BackgroundColor="LightGray" CornerRadius="10" Margin="5">
-                    <StackLayout Padding="10">
-                        <Image Source="dotnet_bot.svg" WidthRequest="50" HeightRequest="50" />
+        <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
+            <Frame BackgroundColor="LightGray" CornerRadius="10" >
+                    <StackLayout Padding="1">
+                        <Image Source="dotnet_bot.svg" WidthRequest="30" HeightRequest="30" />
                         <Label Text="Player 1" HorizontalOptions="Center" />
-                        <Label Text="Points: 0" HorizontalOptions="Center" />
-                        <!-- You can add more player information as needed -->
+                        <Label Text="Score:" HorizontalOptions="Center" />
+                        <Label Text="{Binding Player1Score}" HorizontalOptions="Center" />
                     </StackLayout>
                 </Frame>
                  <Label Text="VS" VerticalOptions="Center" FontSize="24" TextColor="White" FontAttributes="Bold" Padding="25"  />
-
                 <!-- Player 2 Profile Card -->
-                <Frame BackgroundColor="LightGray" CornerRadius="10" Margin="5">
-                    <StackLayout Padding="10"> 
-                        <Image Source="dotnet_bot.svg" WidthRequest="50" HeightRequest="50" />
+                <Frame BackgroundColor="LightGray" CornerRadius="10" >
+                    <StackLayout Padding="1"> 
+                        <Image Source="dotnet_bot.svg" WidthRequest="30" HeightRequest="30" />
                         <Label Text="AI" HorizontalOptions="Center" />
-                        <Label Text="Points: 0" HorizontalOptions="Center" />
+                        <Label Text="Score:" HorizontalOptions="Center" />
+                        <Label Text="{Binding Player2Score}" HorizontalOptions="Center" />
                         <!-- You can add more player information as needed -->
                     </StackLayout>
                 </Frame>
+                 
         </StackLayout>
+         <StackLayout HorizontalOptions="Center" Margin="10">
+             <Label x:Name="WinnerLabel" Text="" HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand" FontSize="20" TextColor="White" FontAttributes="Bold"
+                    IsVisible="True"/>
+         </StackLayout> 
+         
 
-         <Label 
-             BackgroundColor="Lime"
-             x:Name="WinnerLabel" 
-             HorizontalOptions="Center" 
-             VerticalOptions="CenterAndExpand" 
-             Text="Hi there"
-             />
+         
         <!-- Game Board -->
-        <Grid Margin="72" VerticalOptions="Center" >
+        <Grid Margin="70" VerticalOptions="Center" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -76,7 +75,6 @@
                 WidthRequest="80" 
                 HeightRequest="80"
                 Clicked="OnButtonClicked"
-
                 />
             <Button 
                 Grid.Row="0" 
@@ -90,8 +88,6 @@
                 Clicked="OnButtonClicked"
 
                 />
-
-            
             <Button 
                 Grid.Row="1" 
                 Grid.Column="0" 
@@ -182,8 +178,7 @@
                  HorizontalOptions="Center" 
                  Margin="20" 
              />
-             
          </StackLayout>
-
+       
     </StackLayout>
 </ContentPage>

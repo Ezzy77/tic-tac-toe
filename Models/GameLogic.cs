@@ -4,8 +4,8 @@
     {
         private readonly GameBoard _gameBoard;
         private readonly Player[] _players;
-        // public int Player1Score => _players[0].Score;
-        // public int Player2Score => _players[1].Score;
+        public Player Player1 => _players[0]; 
+        public Player Player2 => _players[1]; 
         public Player CurrentPlayer { get; private set; }
         
         public GameLogic(Player player1, Player player2)
