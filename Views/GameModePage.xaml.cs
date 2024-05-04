@@ -14,7 +14,7 @@ public partial class GameModePage : ContentPage
 
     private async void PlayOnlineButton_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new GameBoardPage());
+        await Navigation.PushAsync(new MultiplayerBoardPage());
     }
 
 

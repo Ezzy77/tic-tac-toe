@@ -34,6 +34,21 @@
 
 			}
 		}
+		
+		public GameBoard Clone()
+		{
+			var clone = new GameBoard();
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					// Either PlayerSymbol.X, PlayerSymbol.O or \0 (if the cell is empty)
+					char symbol = this.Board[i, j];
+					clone.Board[i, j] = symbol;
+				}
+			}
+			return clone;
+		}
 
 		private void PrintBoard()
 		{

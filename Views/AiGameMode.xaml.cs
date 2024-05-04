@@ -26,6 +26,10 @@ public partial class AiGameMode
         var col = Grid.GetColumn(button);
 
         var symbol = _viewModel._gameLogic.CurrentPlayer.Symbol;
+        
+        // If it's the AI's turn, skip the user input
+        if (_viewModel._gameLogic.CurrentPlayer.Type == PlayerType.Computer)
+            return;
 
         if (!_viewModel._gameLogic.MakeMove(row, col))
         {
@@ -35,11 +39,13 @@ public partial class AiGameMode
         }
         button.Text = _viewModel._gameLogic.CurrentPlayer.Symbol == PlayerSymbol.X ? "X" : "O";
         
+        // Check for win or draw after human player's turn
+
         if (_viewModel._gameLogic.CheckForWin(_viewModel._gameLogic.CurrentPlayer.Symbol))
         {
             WinnerLabel.IsEnabled = true;
 
-            WinnerLabel.Text = $"Player {symbol} has Won!!!";
+            WinnerLabel.Text = $"Player {_viewModel._gameLogic.CurrentPlayer.Symbol} has Won!!!";
             DisableGameButtons();
             _viewModel._gameLogic.CurrentPlayer.Score+= 1;
             
@@ -60,10 +66,46 @@ public partial class AiGameMode
             WinnerLabel.IsEnabled = true;
 
              WinnerLabel.Text = "Its a draw";
-            ShowWinnerAlert(_viewModel._gameLogic.CurrentPlayer.Name);
+             ShowWinnerAlert(_viewModel._gameLogic.CurrentPlayer.Name);
 
             DisableGameButtons();
         }
+        // Switch to AI's turn
+        _viewModel._gameLogic.SwitchPlayer();
+
+        // AI makes a move
+        if (_viewModel._gameLogic.CurrentPlayer.Type == PlayerType.Computer)
+        {
+            var (_, bestRow, bestCol) = _viewModel._gameLogic.Minimax(_viewModel._gameLogic._gameBoard, _viewModel._gameLogic.CurrentPlayer.Symbol);
+            _viewModel._gameLogic.MakeMove(bestRow, bestCol);
+            
+            // Update UI for AI move
+            var aiButton = (Button)GameGrid.Children.First(c => Grid.GetRow((BindableObject)c) == bestRow && Grid.GetColumn((BindableObject)c) == bestCol);
+            aiButton.Text = _viewModel._gameLogic.CurrentPlayer.Symbol == PlayerSymbol.X ? "X" : "O";
+            
+            // Check for win or draw after AI's move
+            // if (_viewModel._gameLogic.CheckForWin(_viewModel._gameLogic.CurrentPlayer.Symbol))
+            // {
+            //     WinnerLabel.IsEnabled = true;
+            //     WinnerLabel.Text = $"Player {_viewModel._gameLogic.CurrentPlayer.Symbol} has Won!!!";
+            //     DisableGameButtons();
+            //     _viewModel._gameLogic.CurrentPlayer.Score += 1;
+            // }
+            
+            // if (_viewModel._gameLogic.CheckForDraw())
+            // {
+            //     WinnerLabel.IsEnabled = true;
+            //
+            //     WinnerLabel.Text = "Its a draw";
+            //     ShowWinnerAlert(_viewModel._gameLogic.CurrentPlayer.Name);
+            //
+            //     DisableGameButtons();
+            // }
+            
+            
+        }
+        
+        // Switch back to the user for their turn
         _viewModel._gameLogic.SwitchPlayer();
         
     }
@@ -124,4 +166,5 @@ public partial class AiGameMode
         WinnerLabel.Text = "Game Reset";
 
     }
+    
 }

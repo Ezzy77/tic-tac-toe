@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="tic_tac_toe.Views.AiGameMode"
+             x:Class="tic_tac_toe.Views.MultiplayerBoardPage"
              xmlns:vm="clr-namespace:tic_tac_toe.ViewModel"
              Title="Gaming Playground"
              BackgroundColor="#192841">
     <ContentPage.BindingContext>
-        <vm:AiGameModeViewModel />
+        <vm:MultiplayerViewModel />
     </ContentPage.BindingContext>
     <StackLayout VerticalOptions="Center">
          <!-- Player Profiles -->
@@ -14,8 +14,8 @@
             <Frame BackgroundColor="LightGray" CornerRadius="10" >
                     <StackLayout Padding="1">
                         <Image Source="dotnet_bot.svg" WidthRequest="30" HeightRequest="30" />
-                        <Label Text="Player 1" HorizontalOptions="Center" />
-                        <Label Text="Score:" HorizontalOptions="Center" />
+                        <Label x:Name="Player1Name" Text="{Binding Player1Name}" HorizontalOptions="Center" />
+                        <Label x:Name="Player1ScoreLabel" Text="Score:" HorizontalOptions="Center" />
                         <Label Text="{Binding Player1Score}" HorizontalOptions="Center" />
                     </StackLayout>
                 </Frame>
@@ -24,8 +24,8 @@
                 <Frame BackgroundColor="LightGray" CornerRadius="10" >
                     <StackLayout Padding="1"> 
                         <Image Source="dotnet_bot.svg" WidthRequest="30" HeightRequest="30" />
-                        <Label Text="AI" HorizontalOptions="Center" />
-                        <Label Text="Score:" HorizontalOptions="Center" />
+                        <Label x:Name="Player2Name" Text="{Binding Player2Name}" HorizontalOptions="Center" />
+                        <Label x:Name="Player2ScoreLabel" Text="Score:" HorizontalOptions="Center" />
                         <Label Text="{Binding Player2Score}" HorizontalOptions="Center" />
                         <!-- You can add more player information as needed -->
                     </StackLayout>

@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using tic_tac_toe.Models;
 
-namespace tic_tac_toe.Views
+namespace tic_tac_toe.ViewModel
 {
     public class GameViewModel : INotifyPropertyChanged
     {

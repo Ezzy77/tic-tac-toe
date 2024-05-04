@@ -4,19 +4,51 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:tic_tac_toe.Views"
-    xmlns:local="clr-namespace:tic_tac_toe">
+    FlyoutBehavior="Flyout"
+    >
     
-        <FlyoutItem Title="Game Mode" >
-            <ShellContent
-                Title="Game Mode"
-                ContentTemplate="{DataTemplate views:GameModePage}"
-                Route="GameMode" />
-        </FlyoutItem>
-        <FlyoutItem Title="Main Page">
-            <ShellContent
-                Title="Home"
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="MainPage" />
-        </FlyoutItem>
+
+    <ShellContent
+        Title="Loading"
+        ContentTemplate="{DataTemplate views:LoadingPage}"
+        Route="LoadingPage"
+        Shell.FlyoutBehavior="Disabled"
+        Shell.FlyoutItemIsVisible="False"
+    />
+    
+    <ShellContent 
+        Title="Home"
+        ContentTemplate="{DataTemplate views:MainPage}"
+        Route="MainPage"
+    />
+    
+    <ShellContent 
+        Title="Game Mode"
+        ContentTemplate="{DataTemplate views:GameModePage}"
+        Route="GameModePage"
+    />
+    
+    <ShellContent 
+        Title="Profile"
+        ContentTemplate="{DataTemplate views:ProfilePage}"
+        Route="ProfilePage"
+    />
+    
+    
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="LoginPage"
+        Shell.FlyoutBehavior="Disabled"
+        Shell.FlyoutItemIsVisible="False"
+    />
+    <ShellContent
+        Title="Register"
+        ContentTemplate="{DataTemplate views:RegisterPage}"
+        Route="RegisterPage"
+        Shell.FlyoutBehavior="Disabled"
+        Shell.FlyoutItemIsVisible="False"
+    />
+    
 </Shell>
 

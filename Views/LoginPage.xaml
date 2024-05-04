@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="tic_tac_toe.Views.LoginPage"
+             xmlns:vm="clr-namespace:tic_tac_toe.ViewModel"
+             Shell.NavBarIsVisible="False"
+             >
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+    <VerticalStackLayout>
+        <Grid
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Frame
+                Grid.Row="1"
+                HasShadow="False"
+                HeightRequest="700">
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    RowSpacing="20"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Welcome Back!"
+                        TextColor="#1C375C" />
+                    <Label
+                        Grid.Row="1"
+                        Margin="0,-15,0,0"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Login in to account"
+                        TextColor="#1C375C" />
+                    <Entry
+                        Grid.Row="2"
+                        Margin="0,20,0,0"
+                        HorizontalOptions="FillAndExpand"
+                        Placeholder="Email"
+                        Text="{Binding Email}"
+                        VerticalOptions="FillAndExpand" />
+                    <Entry
+                        Grid.Row="3"
+                        HorizontalOptions="FillAndExpand"
+                        IsPassword="True"
+                        Placeholder="Password"
+                        Text="{Binding Password}"
+                        VerticalOptions="FillAndExpand" />
+                    <Button
+                        Grid.Row="4"
+                        BackgroundColor="#1C375C"
+                        Clicked="OnLogin_Clicked"
+                        Command="{Binding LoginBtn}"
+                        CornerRadius="20"
+                        Text="Login" />
+                    <Label
+                        Grid.Row="5"
+                        Margin="0,-10,0,0"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Don't have an account? Sign up here" />
+                    <Button
+                        Grid.Row="6"
+                        BackgroundColor="#1C375C"
+                        Clicked="OnSignup_Clicked"
+                        Command="{Binding RegisterBtn}"
+                        CornerRadius="20"
+                        Text="Sign Up" />
+                </Grid>
+            </Frame>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
+

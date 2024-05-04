@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="tic_tac_toe.Views.RegisterPage"
+             xmlns:vm="clr-namespace:tic_tac_toe.ViewModel"
+             >
+    <ContentPage.BindingContext>
+        <vm:RegisterViewModel />
+    </ContentPage.BindingContext>
+    <Grid
+        Padding="20,50,20,0"
+        HorizontalOptions="FillAndExpand"
+        RowSpacing="20"
+        VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="0"
+            FontAttributes="Bold"
+            FontSize="24"
+            HorizontalOptions="CenterAndExpand"
+            Text="Sign Up"
+            TextColor="#1C375C" />
+        <Label
+            Grid.Row="1"
+            Margin="0,-15,0,0"
+            HorizontalOptions="CenterAndExpand"
+            Text="Sign Up With Email and Username"
+            TextColor="#1C375C" />
+        <Entry
+            Grid.Row="2"
+            Margin="0,20,0,0"
+            HorizontalOptions="FillAndExpand"
+            Placeholder="Email"
+            Text="{Binding Email}"
+            VerticalOptions="FillAndExpand" />
+        <!-- <Entry -->
+        <!--     Grid.Row="3" -->
+        <!--     Margin="0,20,0,0" -->
+        <!--     HorizontalOptions="FillAndExpand" -->
+        <!--     Placeholder="Username" -->
+        <!--     Text="{Binding Username}" -->
+        <!--     VerticalOptions="FillAndExpand" /> -->
+        <Entry
+            Grid.Row="4"
+            HorizontalOptions="FillAndExpand"
+            IsPassword="True"
+            Placeholder="Password"
+            Text="{Binding Password}"
+            VerticalOptions="FillAndExpand" />
+        <Button
+            Grid.Row="5"
+            BackgroundColor="#1C375C"
+            Clicked="OnRegister_Clicked"
+            Command="{Binding RegisterUser}"
+            CornerRadius="20"
+            Text="Sign Up" />
+        <Label
+            Grid.Row="6"
+            Margin="0,-10,0,0"
+            HorizontalOptions="CenterAndExpand"
+            Text="Already a user? Login here" />
+        <Button
+            Grid.Row="7"
+            BackgroundColor="#1C375C"
+            Clicked="OnLogin_Clicked"
+            Command="{Binding LoginBtn}"
+            CornerRadius="20"
+            Text="Login" />
+    </Grid>
+</ContentPage>

@@ -31,6 +31,13 @@ public class Player : INotifyPropertyChanged
         Type = type;
         Score = 0;
     }
+    
+    public Player(string name, PlayerSymbol symbol)
+    {
+        Name = name;
+        Symbol = symbol;
+        Score = 0;
+    }
 
     public event PropertyChangedEventHandler ? PropertyChanged;
 

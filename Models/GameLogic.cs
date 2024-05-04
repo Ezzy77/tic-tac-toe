@@ -2,7 +2,7 @@
 {
     public class GameLogic
     {
-        private readonly GameBoard _gameBoard;
+        public readonly GameBoard _gameBoard;
         private readonly Player[] _players;
         public Player Player1 => _players[0]; 
         public Player Player2 => _players[1]; 
@@ -19,7 +19,15 @@
         {
             if (!IsValidMove(row, col)) return false;
             _gameBoard.UpdateCell(row, col, CurrentPlayer.Symbol);
+
+            // computer move 
+            // if (CurrentPlayer.Type == PlayerType.Computer)
+            // {
+            //     
+            // }
             return true;
+            
+            
         }
 
         private bool IsValidMove(int row, int col)
@@ -104,6 +112,67 @@
                 }
             }
             return true;
+        }
+        
+        
+        public (int score, int row, int col) Minimax(GameBoard board, PlayerSymbol playerSymbol)
+        {
+            // Base case – return the score if game is over
+            if (CheckForWin(PlayerSymbol.X)) return (-10, -1, -1);
+            if (CheckForWin(PlayerSymbol.O)) return (10, -1, -1);
+            if (CheckForDraw()) return (0, -1, -1);
+
+            List<(int score, int row, int col)> moves = new List<(int, int, int)>();
+
+            for(int i=0; i<3; i++)
+            {
+                for(int j=0; j<3; j++)
+                {
+                    if(_gameBoard.IsCellEmpty(i, j))
+                    {
+                        _gameBoard.UpdateCell(i, j, playerSymbol);
+                        int score;
+                        if(playerSymbol == PlayerSymbol.O)
+                        {
+                            score = Minimax(_gameBoard, PlayerSymbol.X).Item1;
+                        }
+                        else
+                        {
+                            score = Minimax(_gameBoard, PlayerSymbol.O).Item1;
+                        }
+                        _gameBoard.UpdateCell(i, j, CurrentPlayer.Symbol);
+                        moves.Add((score, i, j));
+                    }
+                }
+            }
+
+            int bestMove = 0;
+            if(playerSymbol == PlayerSymbol.O)
+            {
+                int bestScore = -1000;
+                for(int i=0; i<moves.Count; i++)
+                {
+                    if(moves[i].Item1 > bestScore)
+                    {
+                        bestMove = i;
+                        bestScore = moves[i].Item1;
+                    }
+                }
+            }
+            else
+            {
+                int bestScore = 1000;
+                for(int i=0; i<moves.Count; i++)
+                {
+                    if(moves[i].Item1 < bestScore)
+                    {
+                        bestMove = i;
+                        bestScore = moves[i].Item1;
+                    }
+                }
+            }
+
+            return moves[bestMove];
         }
     }
 }
