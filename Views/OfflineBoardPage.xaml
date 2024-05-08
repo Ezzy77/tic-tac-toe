@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="tic_tac_toe.Views.OfflineBoardPage"
+             xmlns:vm="clr-namespace:tic_tac_toe.ViewModel"
+             Title="Gaming Playground"
+             BackgroundColor="#192841">
+    <ContentPage.BindingContext>
+        <vm:MultiplayerViewModel />
+    </ContentPage.BindingContext>
+    <StackLayout VerticalOptions="Center">
+         <!-- Player Profiles -->
+        <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
+            <Frame BackgroundColor="LightGray" CornerRadius="10" >
+                    <StackLayout Padding="1">
+                        <Image Source="dotnet_bot.svg" WidthRequest="30" HeightRequest="30" />
+                        <Label x:Name="Player1Name" Text="{Binding Player1Name}" HorizontalOptions="Center" />
+                        <Label x:Name="Player1ScoreLabel" Text="Score:" HorizontalOptions="Center" />
+                        <Label Text="{Binding Player1Score}" HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+                 <Label Text="VS" VerticalOptions="Center" FontSize="24" TextColor="White" FontAttributes="Bold" Padding="25"  />
+                <!-- Player 2 Profile Card -->
+                <Frame BackgroundColor="LightGray" CornerRadius="10" >
+                    <StackLayout Padding="1"> 
+                        <Image Source="dotnet_bot.svg" WidthRequest="30" HeightRequest="30" />
+                        <Label x:Name="Player2Name" Text="{Binding Player2Name}" HorizontalOptions="Center" />
+                        <Label x:Name="Player2ScoreLabel" Text="Score:" HorizontalOptions="Center" />
+                        <Label Text="{Binding Player2Score}" HorizontalOptions="Center" />
+                        <!-- You can add more player information as needed -->
+                    </StackLayout>
+                </Frame>
+                 
+        </StackLayout>
+         <StackLayout HorizontalOptions="Center" Margin="10">
+             <Label x:Name="WinnerLabel" Text="" HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand" FontSize="20" TextColor="White" FontAttributes="Bold"
+                    IsVisible="True"/>
+         </StackLayout> 
+         
+
+         
+        <!-- Game Board -->
+        <Grid Margin="70" VerticalOptions="Center" x:Name="GameGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            
+            <Button 
+                Grid.Row="0" 
+                Grid.Column="0" 
+                FontSize="40" 
+                Text="" 
+                x:Name="Cell00" 
+                Margin="2" 
+                WidthRequest="80" 
+                HeightRequest="80" 
+                Clicked="OnButtonClicked"
+                />
+            <Button 
+                Grid.Row="0" 
+                Grid.Column="1" 
+                FontSize="40" 
+                Text="" 
+                x:Name="Cell01" 
+                Margin="2" 
+                WidthRequest="80" 
+                HeightRequest="80"
+                Clicked="OnButtonClicked"
+                />
+            <Button 
+                Grid.Row="0" 
+                Grid.Column="2" 
+                FontSize="40" 
+                Text="" 
+                x:Name="Cell02" 
+                Margin="2" 
+                WidthRequest="80" 
+                HeightRequest="80"
+                Clicked="OnButtonClicked"
+
+                />
+            <Button 
+                Grid.Row="1" 
+                Grid.Column="0" 
+                FontSize="40"  
+                Text="" x:Name="Cell10" 
+                Margin="2" 
+                WidthRequest="80" 
+                HeightRequest="80"
+                Clicked="OnButtonClicked"
+
+                />
+            <Button 
+                Grid.Row="1" 
+                Grid.Column="1" 
+                FontSize="40"   
+                Text="" 
+                x:Name="Cell11" 
+                Margin="2" 
+                WidthRequest="80" 
+                HeightRequest="80"
+                Clicked="OnButtonClicked"
+
+                />
+            <Button 
+                Grid.Row="1" 
+                Grid.Column="2" 
+                FontSize="40" 
+                Text="" 
+                x:Name="Cell12" 
+                Margin="2" 
+                WidthRequest="80" 
+                HeightRequest="80"
+                Clicked="OnButtonClicked"
+
+                />
+
+            <Button 
+                Grid.Row="2" 
+                Grid.Column="0" 
+                FontSize="40" 
+                Text="" 
+                x:Name="Cell20" 
+                Margin="2" 
+                WidthRequest="80" 
+                HeightRequest="80"
+                Clicked="OnButtonClicked"
+
+                />
+            <Button 
+                Grid.Row="2" 
+                Grid.Column="1" 
+                FontSize="40" 
+                Text="" 
+                x:Name="Cell21" 
+                Margin="2" 
+                WidthRequest="80" 
+                HeightRequest="80"
+                Clicked="OnButtonClicked"
+
+                />
+            
+            <Button 
+                Grid.Row="2" 
+                Grid.Column="2" 
+                FontSize="40" 
+                Text="" 
+                x:Name="Cell22"  
+                Margin="2" 
+                WidthRequest="80" 
+                HeightRequest="80"
+                Clicked="OnButtonClicked"
+
+                />
+        </Grid>
+         <StackLayout Orientation="Horizontal"
+                      HorizontalOptions="CenterAndExpand"
+                      Margin="20,0"
+                      >
+             <Button
+                 Text="Reset The Game"
+                 Clicked="OnGameReset_Clicked"
+                 HorizontalOptions="Center"
+                 Margin="20"
+             />
+             <Button 
+                 Text="Exit The Game" 
+                 Clicked="EndGameButton_Clicked" 
+                 HorizontalOptions="Center" 
+                 Margin="20" 
+             />
+         </StackLayout>
+       
+    </StackLayout>
+</ContentPage>

@@ -26,9 +26,13 @@
 				{
 					Board[row, col] = 'X';
 				}
-				else
+				else if (symbol == PlayerSymbol.O)
 				{
 					Board[row, col] = 'O';
+				}
+				else
+				{
+					Board[row, col] = 'E';
 				}
 				PrintBoard();
 

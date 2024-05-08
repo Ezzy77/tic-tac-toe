@@ -76,33 +76,41 @@ public partial class AiGameMode
         // AI makes a move
         if (_viewModel._gameLogic.CurrentPlayer.Type == PlayerType.Computer)
         {
-            var (_, bestRow, bestCol) = _viewModel._gameLogic.Minimax(_viewModel._gameLogic._gameBoard, _viewModel._gameLogic.CurrentPlayer.Symbol);
+            var (_, bestRow, bestCol) = _viewModel._gameLogic.Minimax(_viewModel._gameLogic._gameBoard, _viewModel._gameLogic.CurrentPlayer.Symbol, int.MinValue, int.MaxValue);
             _viewModel._gameLogic.MakeMove(bestRow, bestCol);
             
             // Update UI for AI move
             var aiButton = (Button)GameGrid.Children.First(c => Grid.GetRow((BindableObject)c) == bestRow && Grid.GetColumn((BindableObject)c) == bestCol);
             aiButton.Text = _viewModel._gameLogic.CurrentPlayer.Symbol == PlayerSymbol.X ? "X" : "O";
             
-            // Check for win or draw after AI's move
-            // if (_viewModel._gameLogic.CheckForWin(_viewModel._gameLogic.CurrentPlayer.Symbol))
-            // {
-            //     WinnerLabel.IsEnabled = true;
-            //     WinnerLabel.Text = $"Player {_viewModel._gameLogic.CurrentPlayer.Symbol} has Won!!!";
-            //     DisableGameButtons();
-            //     _viewModel._gameLogic.CurrentPlayer.Score += 1;
-            // }
+            if (_viewModel._gameLogic.CheckForWin(_viewModel._gameLogic.CurrentPlayer.Symbol))
+            {
+                WinnerLabel.IsEnabled = true;
+
+                WinnerLabel.Text = $"Player {_viewModel._gameLogic.CurrentPlayer.Symbol} has Won!!!";
+                DisableGameButtons();
+                _viewModel._gameLogic.CurrentPlayer.Score+= 1;
             
-            // if (_viewModel._gameLogic.CheckForDraw())
-            // {
-            //     WinnerLabel.IsEnabled = true;
-            //
-            //     WinnerLabel.Text = "Its a draw";
-            //     ShowWinnerAlert(_viewModel._gameLogic.CurrentPlayer.Name);
-            //
-            //     DisableGameButtons();
-            // }
-            
-            
+                // to update UI 
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    _viewModel.UpdatePlayerScores();
+                });
+
+                Console.WriteLine("player 1 score is : " + _viewModel.Player1Score);
+                Console.WriteLine("player 2 score is : " + _viewModel.Player2Score);
+
+                return;
+            }
+            if (_viewModel._gameLogic.CheckForDraw())
+            {
+                WinnerLabel.IsEnabled = true;
+
+                WinnerLabel.Text = "Its a draw";
+                ShowWinnerAlert(_viewModel._gameLogic.CurrentPlayer.Name);
+
+                DisableGameButtons();
+            }
         }
         
         // Switch back to the user for their turn
