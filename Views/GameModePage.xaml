@@ -6,7 +6,6 @@
              >
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
         <Button Text="Play against Computer" Clicked="PlayAgainstComputerButton_Clicked" Margin="10" />
-        <Button Text="Play against Friend Online" Clicked="PlayOnlineButton_Clicked" Margin="10" />
-        <Button Text="Play against Friend Offline" Clicked="PlayOfflineButton_Clicked" Margin="10" />
+        <Button Text="Play against Friend" Clicked="PlayOnlineButton_Clicked" Margin="10" />
     </StackLayout>
 </ContentPage>

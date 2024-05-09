@@ -17,7 +17,7 @@ public partial class AiGameMode
 
     }
     
-    void OnButtonClicked(object sender, EventArgs e)
+   async void OnButtonClicked(object sender, EventArgs e)
     {
         Button button = (Button)sender;
 
@@ -33,6 +33,17 @@ public partial class AiGameMode
 
         if (!_viewModel._gameLogic.MakeMove(row, col))
         {
+            // if its invalid move or a occupied button is pressed, button vibrates
+            Vibration.Vibrate(TimeSpan.FromMilliseconds(100));
+
+            await button.TranslateTo(-15, 0, 50);
+            await button.TranslateTo(15, 0, 50);
+            await button.TranslateTo(-10, 0, 50);
+            await button.TranslateTo(10, 0, 50);
+            await button.TranslateTo(-5, 0, 50);
+            await button.TranslateTo(5, 0, 50);
+            await button.TranslateTo(0, 0, 50);
+
             WinnerLabel.IsEnabled = true;
              WinnerLabel.Text = "Invalid Move";
             return;
@@ -54,6 +65,7 @@ public partial class AiGameMode
             {
                 _viewModel.UpdatePlayerScores();
             });
+            Vibration.Vibrate(TimeSpan.FromSeconds(2));
 
             Console.WriteLine("player 1 score is : " + _viewModel.Player1Score);
             Console.WriteLine("player 2 score is : " + _viewModel.Player2Score);

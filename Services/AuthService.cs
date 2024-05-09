@@ -7,9 +7,9 @@ namespace tic_tac_toe.Services;
 public class AuthService
 {
     private FirebaseAuthClient _firebaseAuthClient;
-    private string _apiKey = "AIzaSyB0LBbbnBwnBh5B_WUpAuYlu5r9LXN8K5Y";
+    private string _apiKey = Secrets.ApiKey;
     // my firebase domain
-    private string _authDomain = "tic-tac-toe-f2da6.firebaseapp.com";
+    private string _authDomain = Secrets.AuthDomain;
 
     public AuthService()
     {

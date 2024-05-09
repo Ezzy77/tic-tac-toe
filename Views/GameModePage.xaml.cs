@@ -16,10 +16,4 @@ public partial class GameModePage : ContentPage
     {
         await Navigation.PushAsync(new MultiplayerBoardPage());
     }
-
-
-    private async void PlayOfflineButton_Clicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new OfflineBoardPage());
-    }
 }

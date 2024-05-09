@@ -1,19 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:tic_tac_toe.ViewModel"
              x:Class="tic_tac_toe.Views.ProfilePage">
-    <VerticalStackLayout Padding="25"
-                         Spacing="25"
-                         >
-        <Label 
-            Text="Profile Page"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            />
-        <Button 
-            Text="Logout"
-            Clicked="OnLogout_Clicked"
-            />
+       <ContentPage.BindingContext>
+              <vm:ProfilePageViewModel />
+       </ContentPage.BindingContext>
+
+       <VerticalStackLayout Spacing="25">
+
+        <Frame Padding="0"
+               WidthRequest="500"
+               HeightRequest="100"
+               CornerRadius="10"
+               HorizontalOptions="Start"
+               VerticalOptions="Start">
+            
+            <HorizontalStackLayout Padding="25">
+
+                <!-- User Profile Image -->
+                <Image x:Name="ProfilePicture"
+                       WidthRequest="50"
+                       HeightRequest="50"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start">
+                    <Image.Clip>
+                        <EllipseGeometry RadiusX="50" RadiusY="50" Center="50,50"/>
+                    </Image.Clip>
+                </Image>
+
+                <VerticalStackLayout Spacing="10" >
+                    <!-- Username -->
+                    <Label Text="Username"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+
+                    <!-- Email -->
+                    <Label Text="Email"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                    
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+        </Frame>
+              <Button x:Name="takePhotoButton"
+                      Text="Take Photo"
+                      Clicked="OnTakePhotoButtonClicked" />
+              <Button x:Name="uploadPhotoButton"
+                                    Text="Upload Photo"
+                                    Clicked="OnUploadButtonClicked" />
+                                    
+        <Label Text="Device Information:" FontSize="Large" HorizontalOptions="CenterAndExpand" />
+
+        <Label>
+               <Label.FormattedText>
+                      <FormattedString>
+                             <Span Text="Device Model: " />
+                             <Span Text="{Binding DeviceModel}" />
+                      </FormattedString>
+               </Label.FormattedText>
+        </Label>
+        <!-- Device Manufacturer -->
+        <Label>
+               <Label.FormattedText>
+                      <FormattedString>
+                             <Span Text="Device Manufacturer: " />
+                             <Span Text="{Binding DeviceManufacturer}" />
+                      </FormattedString>
+               </Label.FormattedText>
+        </Label>
+        <!-- Device Name -->
+        <Label>
+               <Label.FormattedText>
+                      <FormattedString>
+                             <Span Text="Device Name: " />
+                             <Span Text="{Binding DeviceName}" />
+                      </FormattedString>
+               </Label.FormattedText>
+        </Label>
+
+        <!-- Device Version -->
+        <Label>
+               <Label.FormattedText>
+                      <FormattedString>
+                             <Span Text="Device Version: " />
+                             <Span Text="{Binding DeviceVersion}" />
+                      </FormattedString>
+               </Label.FormattedText>
+        </Label>
+
+        <!-- Device Platform -->
+        <Label>
+               <Label.FormattedText>
+                      <FormattedString>
+                             <Span Text="Device Platform: " />
+                             <Span Text="{Binding DevicePlatform}" />
+                      </FormattedString>
+               </Label.FormattedText>
+        </Label>
+        <!-- Battery Level -->
+        <Label>
+               <Label.FormattedText>
+                      <FormattedString>
+                             <Span Text="Battery Level: " />
+                             <Span Text="{Binding BatteryLevel}" />
+                      </FormattedString>
+               </Label.FormattedText>
+        </Label>
+
+        <!-- Network Connectivity -->
+        <Label>
+               <Label.FormattedText>
+                      <FormattedString>
+                             <Span Text="Network Connectivity: " />
+                             <Span Text="{Binding NetworkAccess}" />
+                      </FormattedString>
+               </Label.FormattedText>
+        </Label>
+
+        <!-- Device Idiom -->
+        <Label>
+               <Label.FormattedText>
+                      <FormattedString>
+                             <Span Text="Device Idiom: " />
+                             <Span Text="{Binding DeviceIdiom}" />
+                      </FormattedString>
+               </Label.FormattedText>
+        </Label>
+
+        <Button Text="Logout"
+                Clicked="OnLogout_Clicked"
+                HorizontalOptions="Center"/>
+
     </VerticalStackLayout>
+
 </ContentPage>

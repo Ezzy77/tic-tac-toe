@@ -53,6 +53,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="FirebaseAuthentication.net" Version="4.1.0" />
+		<PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
@@ -104,5 +105,10 @@
 	    <DependentUpon>MainPage.xaml</DependentUpon>
 	    <SubType>Code</SubType>
 	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="Mono.Android">
+	    <HintPath>..\..\..\..\usr\local\share\dotnet\packs\Microsoft.Android.Ref.33\33.0.95\ref\net7.0\Mono.Android.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 </Project>

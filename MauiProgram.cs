@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Android.App;
+using Microsoft.Extensions.Logging;
 using tic_tac_toe.Services;
 using tic_tac_toe.Views;
 
 namespace tic_tac_toe;
 
+[Activity(Label = "MyMauiApp", Theme = "@style/MainTheme", MainLauncher = true)]
 public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
@@ -22,6 +24,7 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 		builder.Services.AddSingleton<AuthService>();
+		builder.Services.AddSingleton<StorageService>();
 		builder.Services.AddTransient<LoadingPage>();
 		builder.Services.AddTransient<LoginPage>();
 		builder.Services.AddTransient<ProfilePage>();
